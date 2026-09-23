@@ -1,0 +1,223 @@
+def main():
+    #demo1()
+    #demo2()
+    #loan_qualifier()
+    #demo3()
+    #demo4()
+    #is_even()
+    demo5()
+
+def demo5():
+    score = 90
+    if score >= 65:
+        grade = "Pass"
+    else:
+        grade = "Fail"
+
+    grade = "Pass" if score >= 65 else "Fail"  #value_1 if <condition> else value_2
+    print(grade)
+    score = 55
+    grade = "Pass" if score >= 65 else ("Almost pass" if score >= 50 else "Fail")
+    print(grade)
+
+    (score := 75)
+    print(score)
+    print(score := 85)
+
+    pay = 0
+    hours = 35
+    pay_rate = 20
+    pay = hours * pay_rate
+    if pay > 650:
+        print("You earned over $650")
+
+    if (pay := hours * pay_rate) > 650:
+        print("You earned more than $650")
+    print(pay)
+
+
+
+
+def is_even():
+    num = int(input("Enter a number to check if it is even: "))
+    print(num % 2 == 0)
+
+def demo4():
+    #check a range from 20 through 40
+    num = int(input("Enter number from 20-40: "))
+    if num >= 20 and num <= 40:
+        print("In range.")
+    else:
+        print("Out of range.")
+
+        # check a range not from 20 through 40
+    num = int(input("Enter number from 20-40: "))
+    if num < 20 or num > 40:
+        print("In range.")
+        in_range = True
+    else:
+        print("Out of range.")
+        in_range = False
+
+    if in_range: # == True: not needed
+        print("Number is a valid value.")
+
+
+        #if num < 20 and num > 40:
+
+
+
+def demo3():
+    num1 = 5
+    num2 = 10
+    num3 = 20
+    num4 = 25
+    if num1 < num2 and num2 < num3:
+        print("1111111")
+    else:
+        print("2222222")
+    if num1 < num2 and num3 < num2:
+        print("1111111")
+    else:
+        print("2222222")
+
+    if num1 < num2 or num2 < num3:
+        print("1111111")
+    else:
+        print("2222222")
+    if num1 < num2 or num3 < num2:
+        print("1111111")
+    else:
+        print("2222222")
+
+    num1 = 5
+    num2 = 10
+    num3 = 20
+    num4 = 25
+    #short-circuit evaluation
+    if num1 < num2 or num4 // (num1 // num2) > 2:
+        print("33333333")
+
+    if num1 > num2 and num4 // (num1 // num2) > 2:
+        print("4444444")
+    else:
+        print("5555555")
+
+    #crashes
+    # if num4 // (num1 // num2) > 2 and num1 > num2:
+    #     print("4444444")
+    # else:
+    #     print("5555555")
+    if not(num1 > num2 and num4 // (num1 // num2) > 2):
+        print("4444444")
+    else:
+        print("5555555")
+
+    #DeMorgan's law
+
+    if num1 > num2 or num3 <= num4:
+        print("11111")
+    else:
+        print("22222")
+
+    if not(num1 > num2 or num3 <= num4):
+        print("11111")
+    else:
+        print("22222")
+    # DeMorgan's law
+    #if not(num1 > num2) and not(num3 <= num4):
+    if num1 <= num2 and num3 > num4:
+        print("11111")
+    else:
+        print("22222")
+
+
+def loan_qualifier():
+    MIN_SALARY = 30000.00
+    MIN_YEARS = 2
+
+    salary = float(input("Enter annual salary: "))
+    years_on_job = int(input("Enter the number of years employed: "))
+    # if salary > MIN_SALARY and years_on_job > MIN_YEARS:
+    #     print("You qualify for the loan!")
+    # else:
+    #     print("You did not qualify for loan.")
+
+    if salary > MIN_SALARY:
+        if years_on_job > MIN_YEARS:
+            print("You qualify for the loan!")
+        else:
+            print(f"You did not qualify for loan because you must be working there for at least {MIN_YEARS} years.")
+    else:
+        print(f"You did not qualify for loan because you must be earning at least {MIN_SALARY} dollars.")
+
+
+def demo2():
+    score = int(input("Enter score: "))
+    if score >= 90:
+        print("You earned an A!")
+    else:
+        if score >= 80:
+            print("You earned a B.")
+        else:
+            if score >= 70:
+                print("You earned a C.")
+            else:
+                if score >= 65:
+                    print("You earned a D.")
+                else:
+                    print("You failed!")
+    if score >= 90:
+        print("You earned an A!")
+    elif score >= 80:
+         print("You earned a B.")
+    elif score >= 70:
+         print("You earned a C.")
+    elif score >= 65:
+         print("You earned a D.")
+    else:
+         print("You failed!")
+
+
+def demo1():
+    num1 = 10
+    num2 = 15
+    num3 = 20
+    if num1 < num2:
+        print(f"{num1} is lower than {num2}")
+        print(f"{num2} is larger")
+    if num3 < num2:
+        print(f"{num3} is lower than {num2}")
+    if num1 > num2:
+        print(f"{num1} is greater than {num2}")
+    if num1 != num2:
+        print(f"{num1} is not equal to {num2}")
+    print("-----------")
+    num1 = num2 + 2
+    if num1 < num2:
+        print(f"{num1} is lower than {num2}")
+        print(f"{num2} is larger")
+    else:
+        print(f"{num2} is lower or equal to {num1}")
+        print(f"{num1} is larger")
+
+    score = 70
+    if score < 65:
+        print("You failed")
+    else:
+        print("You passed!!")
+
+    name1 = "Yankel"
+    name2 = "Yankey"
+    if name1 < name2:
+        print(f"{name1} is less than {name2}")
+    else:
+        print(f"{name2} is less than {name1}")
+    name1 = "Yankel"
+    name2 = "YaNkey"
+    if name1 < name2:
+        print(f"{name1} is less than {name2}")
+    else:
+        print(f"{name2} is less than {name1}")
+
+main()
