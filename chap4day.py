@@ -4,7 +4,142 @@ def main():
     #demo2()
     #demo3()
     #demo4()
-    demo5()
+    #demo5()
+    #squares()
+    #demo6()
+    #demo7()
+    #demo8()
+    #demo9()
+    #demo10()
+    #demo11()
+    #demo12()
+    #demo13()
+    demo14()
+
+def demo14():
+    for row in range(5):
+        for col in range(4):
+            print("*", end=" ")
+        print()
+
+    for row in range(10):
+        for col in range(10 - row):
+            print("*", end=" ")
+        print()
+
+    for row in range(1, 11):
+        for col in range(row):
+            print("*", end=" ")
+        print()
+
+    star = "*"
+    for row in range(1, 11):
+        for col in range(row):
+            print(f"{star:^10}", end=" ")
+        print()
+
+    for i in range(1, 10):
+        for j in range(1, 10):
+            print(f"{(i * j):3}", end=" ")
+        print()
+
+
+def demo13():
+    num_students = int(input("How many students do you have? "))
+    num_test_scores = int(input("How many exams do you have? "))
+    for student in range(num_students):
+        total = 0.0
+        print(f"Student #{student + 1}")
+        print("------------")
+        for test_num in range(num_test_scores):
+            score = int(input(f" Exam #{test_num + 1}: "))
+            total += score
+        average = total / num_test_scores
+        print(f'The average for student #{student + 1} is {average:.1f} ')
+
+
+def demo12():
+    for hours in range(24):
+        for minutes in range(60):
+            for seconds in range(60):
+                print(f"{hours:2d}:{minutes:2d}:{seconds:2d}")
+
+def demo11():
+    while (score := int(input('Enter score: '))) < 0:
+        print("A score cannot be negative!!")
+
+def demo10():
+    hours = int(input("How many hours were logged this week? "))
+    while hours > 50:
+        hours = int(input("Error! How many hours were logged this week? "))
+
+    salary_rate = int(input("What is the pay rate? "))
+    salary = hours * salary_rate
+    print(f"The salary is ${salary:,.2f}")
+
+def demo9():
+    exam = int(input("Enter an exam grade (50-100): "))
+    while not(exam >= 50 and exam <=100):
+    #while exam < 50 or exam > 100:
+        print("ERROR: Exam must be between 50 and 100")
+        exam = int(input("Enter an exam grade (50-100: "))
+
+    print(f"Exam score is {exam}")
+
+def demo8():
+    total = 0
+    total_amount_of_values = 0
+    num = int(input(f"Enter number #{total_amount_of_values + 1}: "))
+    while num != "STOP":
+        total_amount_of_values += 1
+        total += num
+        num = input(f"Enter number #{total_amount_of_values + 1} (\"STOP\" when done): ")
+        if num != "STOP":
+            num = int(num)
+
+    print(f"The sum of your numbers is {total}.")
+    if total_amount_of_values != 0:
+        print(f"The average of your numbers is {total / total_amount_of_values}.")
+    else:
+        print("No numbers - no average!!")
+
+
+def demo7():
+    total = 0
+    total_amount_of_values = 0
+    SENTINAL = -999
+    num = int(input(f"Enter number #{total_amount_of_values + 1}: "))
+    while num != SENTINAL:
+        total_amount_of_values += 1
+        total += num
+        num = int(input(f"Enter number #{total_amount_of_values + 1} (-999 to stop): "))
+
+    print(f"The sum of your numbers is {total}.")
+    if total_amount_of_values != 0:
+        print(f"The average of your numbers is {total / total_amount_of_values}.")
+    else:
+        print("No numbers - no average!!")
+
+def demo6():
+    numbers_to_enter = int(input("How many values to you want to sum and average: "))
+    total = 0
+    for i in range(numbers_to_enter):
+        num = int(input(f"Enter a number #{i + 1}: "))
+        total += num
+    print(f"The sum of your numbers is {total}.")
+    print(f"The average of your numbers is {total / numbers_to_enter}.")
+
+def squares():
+    start = int(input("What number would you like to start from: "))
+    end = int(input("What number would you like to end: "))
+    print('Number\tSquare')
+    print("-------------------")
+    for num in range(start, end):
+        square = num ** 2
+        print(f"{num}\t\t{square}")
+
+
+
 
 def demo5():
     for num in range(5):
@@ -22,7 +157,9 @@ def demo5():
     print("\n----------")
     for num in range(10, 21, 2):
         print(num, end=" ")
-
+    print("\n----------")
+    for num in range(10, 0, -1):
+        print(num, end=" ")
 
 def demo4():
     for num in [1, 2, 3, 4, 5]:
