@@ -1,0 +1,269 @@
+import os
+
+def main():
+    #demo1()
+    #demo2()
+    #demo3()
+    #demo4()
+    #demo5()
+    #demo6()
+    #demo7()
+    #demo8()
+    #demo9()
+    #demo10()
+    #demo11()
+    demo12()
+
+
+def demo12():
+    filename = input("Enter file to open: ")
+    try:
+        with open(filename, 'r') as sales_file:
+            line = sales_file.readline()
+            total = 0
+            while line != '':
+                amount = float(line)
+                print(f"{amount:.2f}")
+                total += amount
+                line = sales_file.readline()
+
+            #print(total/0)
+            #os.rename(filename,"testname.txt")
+    except FileNotFoundError as err:
+        print(err)
+        #print(f"The file {filename} is not found!")
+    except ValueError as err:
+        print(err)
+    except ZeroDivisionError as err:
+        print(err)
+    except IOError as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    else:
+        print(f"Total Sales =  {total:.2f}")
+
+
+
+
+
+
+def demo11():
+    filename = input("Enter file to open: ")
+    try:
+        with open(filename, 'r') as emp_file:
+            # name = emp_file.readline().rstrip('\n')
+            # while name != '':
+            for emp in emp_file:
+                name = emp.rstrip('\n')
+                id_num = emp_file.readline().rstrip('\n')
+                dept = emp_file.readline().rstrip('\n')
+
+                print(f"Data for employee {name}: ", end=" ")
+                print(f"Name: {name} | ID Number: {id_num} | Dept: {dept}")
+                # name = emp_file.readline().rstrip('\n')
+    except:
+        print(f"The file {filename} is not found!")
+
+def demo10():
+    try:
+        hours = int(input("Hours worked: "))
+        pay_rate = int(input("Pay Rate: "))
+        gross_pay = hours * pay_rate
+
+        print(f"Gross pay is ${gross_pay:,.2f}")
+    except ValueError:
+        print("Error!!; Hours worked must be a numeric input!!")
+
+def demo9():
+    num1 = int(input("Enter a number: "))
+    num2 = int(input("Enter another number: "))
+    if num2 != 0:
+        result = num1 / num2
+        print(f"{num1} divided by {num2} is {result}")
+    else:
+        print("Cannot divide by zero!")
+
+
+
+def delete_record(file_name, old_id_num):
+    found = False
+    with open(file_name, 'r') as emp_file, open('temp.txt', 'w') as temp_file :
+        name = emp_file.readline().rstrip('\n')
+        while name != '':
+            id = emp_file.readline().rstrip('\n')
+            dept = emp_file.readline().rstrip('\n')
+            if id == old_id_num:
+                found = True
+            else:
+                temp_file.write(f'{name}\n')
+                temp_file.write(f'{id}\n')
+                temp_file.write(f'{dept}\n')
+            name = emp_file.readline().rstrip('\n')
+    if not found:
+        print(f"Employee id {old_id_num} was not found.")
+    os.remove(file_name)
+    os.rename('temp.txt', file_name)
+
+def change_record(file_name, old_id_num):
+    found = False
+    with open(file_name, 'r') as emp_file, open('temp.txt', 'w') as temp_file :
+        name = emp_file.readline().rstrip('\n')
+        while name != '':
+            id = emp_file.readline().rstrip('\n')
+            dept = emp_file.readline().rstrip('\n')
+            if id == old_id_num:
+                found = True
+                print("Enter data for new employee")
+                new_name = input("Name: ")
+                new_id_num = input("ID Num: ")
+                new_dept = input("Department: ")
+                temp_file.write(f'{new_name}\n')
+                temp_file.write(f'{new_id_num}\n')
+                temp_file.write(f'{new_dept}\n')
+            else:
+                temp_file.write(f'{name}\n')
+                temp_file.write(f'{id}\n')
+                temp_file.write(f'{dept}\n')
+            name = emp_file.readline().rstrip('\n')
+    if not found:
+        print(f"Employee id {old_id_num} was not found.")
+    os.remove(file_name)
+    os.rename('temp.txt', file_name)
+
+
+
+def search_record(file_name, id_num):
+    found = False
+    with open(file_name, 'r') as emp_file:
+        name = emp_file.readline().rstrip('\n')
+        while name != '' and not found:
+            id = emp_file.readline().rstrip('\n')
+            dept = emp_file.readline().rstrip('\n')
+            if id == id_num:
+                found = True
+                print(f"Employee data found: ", end=" ")
+                print(f"Name: {name} | ID Number: {id} | Dept: {dept}")
+            name = emp_file.readline().rstrip('\n')
+    if not found:
+        print(f"Employee id {id_num} was not found.")
+
+def demo8():
+    search = input("Which id would you like to search for: ")
+    #search_record('employees.txt', search)
+    #change_record('employees.txt',search)
+    delete_record('employees.txt', search)
+
+
+
+def demo7():
+    #num_emps = int(input("How many emplyees to enter: "))
+    with open('employees.txt', 'r') as emp_file:
+        #name = emp_file.readline().rstrip('\n')
+        #while name != '':
+        for emp in emp_file:
+            name = emp.rstrip('\n')
+            id_num = emp_file.readline().rstrip('\n')
+            dept = emp_file.readline().rstrip('\n')
+
+            print(f"Data for employee {name}: ", end=" ")
+            print(f"Name: {name} | ID Number: {id_num} | Dept: {dept}")
+            #name = emp_file.readline().rstrip('\n')
+
+
+def demo6():
+    num_emps = int(input("How many emplyees to enter: "))
+    with open('employees.txt', 'w') as emp_file:
+        for count in range(1, num_emps + 1):
+            print("Enter data for employee")
+            name = input("Name: ")
+            id_num = input("ID Num: ")
+            dept = input("Department: ")
+            emp_file.write(f'{name}\n')
+            emp_file.write(f'{id_num}\n')
+            emp_file.write(f'{dept}\n')
+
+
+def demo5():
+    sales_file = open('sales.txt', "r")
+    total_amount = 0
+    line = sales_file.readline()
+    while line != '':
+        if line != '\n': #skips a blank linein the middle of the data
+            amount = float(line)
+            total_amount += amount
+        line = sales_file.readline()
+    sales_file.close()
+    print(f"Total sales is ${total_amount:.2f}.")
+
+
+def demo4():
+    num_days = int(input("How many days of sales data do you have? "))
+    sales_file = open('sales.txt', "w")
+    for i in range(1, num_days + 1):
+        sales = float(input(f"Enter sales for day #{i}: "))
+        sales_file.write(f'{sales}\n')
+    sales_file.close()
+    print("Data writen to file.")
+
+def demo3():
+    print("Enter three numbers")
+    num1 = int(input("Number #1: "))
+    num2 = int(input("Number #2: "))
+    num3 = int(input("Number #3: "))
+    sum = num1 + num2 + num3
+    myfile = open('numbers.txt', 'w')
+    myfile.write(str(num1) + '\n')
+    myfile.write(str(num2) + '\n')
+    myfile.write(str(num3) + '\n')
+    myfile.write(f"     {str(sum)}     \n")
+    myfile.close()
+    myfile = open('numbers.txt', 'r')
+    num1 = int(myfile.readline())
+    num2 = int(myfile.readline())
+    num3 = int(myfile.readline())
+    sum =  int(myfile.readline())
+    print(num1, num2, num3, "Sum = ", sum)
+    print(int("         200           "))
+
+def demo2():
+        print("Enter 3 names of characters in Beraishis")
+        name1 = input("Name #1: ")
+        name2 = input("Name #2: ")
+        name3 = input("Name #3: ")
+        outfile = open('torah1.txt', 'a')
+        outfile.write(name1 + '\n')
+        outfile.write(f"{name2}\n")
+        outfile.write(f"{name3}\n")
+        outfile.close()
+
+
+def demo1():
+       print("Enter 3 names of characters in Beraishis")
+       name1 = input("Name #1: ")
+       name2 = input("Name #2: ")
+       name3 = input("Name #3: ")
+       outfile = open('torah1.txt', 'w')
+       outfile.write(name1 + '\n')
+       outfile.write(f"{name2}\n")
+       outfile.write(f"{name3}\n")
+       outfile.close()
+       print("-----------")
+       infile = open('torah1.txt','r')
+       contents = infile.read()
+       print(contents)
+       infile.close()
+       print("-----------")
+       infile = open('torah1.txt', 'r')
+       name1 = infile.readline()
+       name2 = infile.readline().rstrip('\n')
+       name3 = infile.readline()
+       name1 = name1.rstrip('\n')
+       name3 = name3.rstrip('\n')
+       print(f"name1: {name1}, name2: {name2}, name3: {name3}")
+       infile.close()
+
+
+if __name__ == '__main__':
+    main()
+
