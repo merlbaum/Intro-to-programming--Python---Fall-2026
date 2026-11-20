@@ -1,0 +1,264 @@
+import os
+
+
+def main():
+    #demo1()
+    #demo2()
+    #demo3()
+    #demo4()
+    #demo5()
+    #demo6()
+    #demo7()
+    #demo8()
+    #demo9()
+    #demo10()
+    #demo11()
+    #demo12()
+    #demo13()
+    demo14()
+
+def demo14():
+        filename = input("Enter file name of sales data: ")
+        try:
+            with open(filename, 'r') as sales_file:
+                line = sales_file.readline()
+                total_amount = 0
+                while line != '':
+                    amount = float(line)
+                    #print(f'{amount:.2f}')
+                    total_amount += amount
+                    line = sales_file.readline()
+
+                #print(total_amount/0)
+                #print(num)
+
+        except FileNotFoundError as err:
+            print(err)
+            #print("File not found!!")
+
+        except ValueError as err:
+            print(err)
+            #print("Non-numeric data found in file!!")
+
+        except IOError as err:
+            print("IOError caught")
+            print(err)
+        except ZeroDivisionError as err:
+            print(err)
+        except Exception as err:
+            print(err)
+            print("An error occured.")
+        else:
+            print(f'Total Sales = {total_amount:.2f}')
+
+
+
+def demo13():
+    filename = input("Enter file name to open: ")
+    try:
+        with open(filename, 'r') as emp_file:
+            #name = emp_file.readline().rstrip('\n')
+            #while name != '':
+            for emp in emp_file:
+                name = emp_file.readline().rstrip('\n')
+                id_num = emp_file.readline().rstrip('\n')
+                dept = emp_file.readline().rstrip('\n')
+
+                print(f"Data for employee {emp}", end=" ")
+                print(f"Name: {name}  | ID_NUM: {id_num}  | Department: {dept}")
+                print()
+                #name = emp_file.readline().rstrip('\n')
+    except:
+        print(f"The file {filename} is not found!!")
+
+
+
+def demo12():
+    try:
+        hours = int(input("How many hours did you work? "))
+        pay_rate = float(input("Enter hourly pay rate: "))
+        gross_pay = hours * pay_rate
+
+        print(f"Gross pay is ${gross_pay:,.2f}.")
+    except ValueError:
+        print("Error: Hours worked must be a valid numeric value!!")
+
+
+def demo11():
+    num1 = int(input("Enter a number: "))
+    num2 = int(input("Enter another number: "))
+    if num2 != 0:
+        result = num1 / num2;
+        print(f'{num1} divided by {num2} equals {result}.')
+    else:
+        print("Cannot divide by zero.")
+
+
+def demo10():
+    found = False
+    search = input("Which name would you like to change? ")
+    new_name = input("What would you like to change it to? ")
+    with open('names.txt', 'r') as old_file, open('temp.txt', 'w') as temp_file:
+        cur_name = old_file.readline().rstrip('\n')
+        while cur_name != '': 
+            if cur_name == search:
+                temp_file.write(f'{new_name}\n')
+                found = True
+            else:
+                temp_file.write(f'{cur_name}\n')
+            cur_name = old_file.readline().rstrip('\n')
+
+    os.remove('names.txt')
+    os.rename('temp.txt', 'names.txt')
+    if found:
+        print("The file has been updated.")
+    else:
+        print("Name was not found.")
+
+def demo9():
+    with open('employees.txt', 'r') as emp_file:
+        for line in emp_file:
+            if line[0:1] == '#':
+                count = line[1:3]
+
+    another = 'y'
+    with open('employees.txt', 'a') as emp_file:
+        while another == 'y' or another == 'Y':
+            print("Enter data for employee")
+            name = input("Name: ")
+            id_num = input("ID number: ")
+            dept = input("Department: ")
+            count += 1
+            emp_file.write(f'#{count}')
+            emp_file.write(f'{name}\n')
+            emp_file.write(f'{id_num}\n')
+            emp_file.write(f'{dept}\n')
+
+            another = input("do you have another to enter(Y or N): ")
+
+def demo8():
+    with open('employees.txt', 'r') as emp_file:
+        #name = emp_file.readline().rstrip('\n')
+        #while name != '':
+        for emp in emp_file:
+            name = emp_file.readline().rstrip('\n')
+            id_num = emp_file.readline().rstrip('\n')
+            dept = emp_file.readline().rstrip('\n')
+
+            print(f"Data for employee {emp}", end=" ")
+            print(f"Name: {name}  | ID_NUM: {id_num}  | Department: {dept}")
+            print()
+            #name = emp_file.readline().rstrip('\n')
+
+
+def demo7():
+    num_emps = int(input("How many employees to enter: "))
+    with open('employees.txt', 'w') as emp_file:
+        for count in range(1, num_emps + 1):
+            print("Enter data for employee")
+            name = input("Name: ")
+            id_num = input("ID number: ")
+            dept = input("Department: ")
+
+            emp_file.write(f'{name}\n')
+            emp_file.write(f'{id_num}\n')
+            emp_file.write(f'{dept}\n')
+
+
+def demo6():
+    sales_file = open('sales.txt', 'r')
+    line = sales_file.readline()
+    total_amount = 0
+    while line != '':
+        amount = float(line)
+        print(f'{amount:.2f}')
+        total_amount += amount
+        line = sales_file.readline()
+
+    sales_file.close()
+    print(f'Total Sales = {total_amount:.2f}')
+
+def demo5():
+    num_days = int(input("How many days of data do you have? "))
+    sales_file = open('sales.txt', 'w')
+
+    for i in range(1, num_days + 1):
+        sales = float(input(f"Enter the sales for day #{i}: "))
+        sales_file.write(f'{sales}\n')
+    sales_file.close()
+    print("Data written to te file.")
+
+
+def demo4():
+    print("Enter three numbers.")
+    num1 = int(input("Number #1: "))
+    num2 = int(input("Number #2: "))
+    num3 = int(input("Number #3: "))
+    myfile = open('numbers.txt', 'w')
+    myfile.write(str(num1) + '\n')
+    myfile.write(str(num2) + '\n')
+    myfile.write(str(num3) + '\n')
+    myfile.close()
+
+    myfile = open('numbers.txt', 'r')
+    num1 = int(myfile.readline())
+    num2 = int(myfile.readline())
+    num3 = int(myfile.readline())
+    print(num1, num2, num3, num1 + num2 + num3)
+
+
+
+def demo3():
+    myfile = open('torah.txt', 'a')
+    myfile.write('Yaakov\n')
+    myfile.write('Rivka\n')
+    myfile.write('Rachel\n')
+    myfile.write('Leah\n')
+    myfile.close()
+
+
+def demo2():
+    print("Enter names of three Torah personalities.")
+    name1 = input("Name #1: ")
+    name2 = input("Name #2: ")
+    name3 = input("Name #3: ")
+    myfile = open('torah.txt', 'w')
+    myfile.write(name1 + '\n')
+    myfile.write(f"{name2}\n{name3}\n")
+    myfile.close()
+
+    myfile = open('torah.txt', 'r')
+    name1 = myfile.readline().rstrip('\n')
+    #name1 = name1.rstrip('\n')
+    name2 = myfile.readline()
+    name2 = name2.rstrip('\n')
+    name3 = myfile.readline()
+    name3 = name3.rstrip('\n')
+    print(f"Three names from Chaya Sara are {name1}, {name2}, and {name3}.")
+
+
+def demo1():
+    out_file = open('Tanaaim.txt', 'w')
+    out_file.write('Hillel\n')
+    out_file.write('Shamai\n')
+    out_file.write("Rabban Gamliel\n")
+    out_file.close()
+
+    in_file = open('Tanaaim.txt', 'r')
+    file_content = in_file.read()
+    print(file_content)
+    in_file.close()
+
+    in_file = open('Tanaaim.txt', 'r')
+    line1 = in_file.readline()
+    line2 = in_file.readline()
+    line3 = in_file.readline()
+    print(line3, line1, line2)
+
+
+if __name__ == '__main__':
+    main()
+
+
+
+
